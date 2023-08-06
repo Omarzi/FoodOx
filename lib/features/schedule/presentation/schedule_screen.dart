@@ -43,7 +43,8 @@ class ScheduleScreen extends StatelessWidget {
           );
         } else if (state is ScheduleErrorState) {
           SnackBar snackBar = SnackBarComponent.snackBar(
-              content: 'Make schedule has a problem');
+            content: 'Make schedule has a problem',
+          );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
@@ -84,10 +85,11 @@ class ScheduleScreen extends StatelessWidget {
                         Text(
                           'BreakFast : ',
                           style: GoogleFonts.darkerGrotesque(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.underline,
-                              height: 1.h),
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w700,
+                            decoration: TextDecoration.underline,
+                            height: 1.h,
+                          ),
                         ),
                         ThemeSelectionComponent(
                           onThemeChanged: (isWeek) {
@@ -102,14 +104,14 @@ class ScheduleScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     Divider(color: Colors.grey[500], thickness: 1),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 15.h),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Lunch : ',
                           style: GoogleFonts.darkerGrotesque(
-                              fontSize: 22,
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.w700,
                               decoration: TextDecoration.underline,
                               height: 1.h),
@@ -119,7 +121,11 @@ class ScheduleScreen extends StatelessWidget {
                           children: [
                             Text(
                               "From : ",
-                              style: TextStyle(fontSize: 16.sp),
+                              style: GoogleFonts.darkerGrotesque(
+                                fontSize: 18.sp,
+                                height: 1.h,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -132,7 +138,11 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                             Text(
                               "  To : ",
-                              style: TextStyle(fontSize: 16.sp),
+                              style: GoogleFonts.darkerGrotesque(
+                                fontSize: 18.sp,
+                                height: 1.h,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -166,7 +176,11 @@ class ScheduleScreen extends StatelessWidget {
                           children: [
                             Text(
                               "From : ",
-                              style: TextStyle(fontSize: 18.sp),
+                              style: GoogleFonts.darkerGrotesque(
+                                fontSize: 18.sp,
+                                height: 1.h,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -179,7 +193,11 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                             Text(
                               "  To : ",
-                              style: TextStyle(fontSize: 18.sp),
+                              style: GoogleFonts.darkerGrotesque(
+                                fontSize: 18.sp,
+                                height: 1.h,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
