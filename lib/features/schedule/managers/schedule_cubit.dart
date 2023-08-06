@@ -21,7 +21,13 @@ class ScheduleCubit extends Cubit<ScheduleState> {
     required String break_to,
   }) async {
     emit(ScheduleLoadingState());
-    await dioHelper.postData(endPoint: 'user/schedule').then((response) {
+    await dioHelper.postData(endPoint: 'user/schedule', body: {
+      "period": period,
+      "work_from": work_from,
+      "work_to": work_to,
+      "break_from": break_from,
+      "break_to": break_to,
+    }).then((response) {
       print(response.data);
       emit(ScheduleSuccessState());
     }).catchError((error) {
