@@ -40,7 +40,7 @@ class _TimeSelectionComponentState extends State<TimeSelectionComponent> {
     return GestureDetector(
       onTap: _showTimePicker,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: Colors.grey),
@@ -48,7 +48,7 @@ class _TimeSelectionComponentState extends State<TimeSelectionComponent> {
         child: Row(
           children: [
             Icon(Icons.access_time),
-            SizedBox(width: 8),
+            SizedBox(width: 2.w),
             Text(
               selectedTime.format(context),
               style: TextStyle(fontSize: 14.sp),

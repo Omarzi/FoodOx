@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ox/components/app_buttons.dart';
 import 'package:food_ox/components/snack_bar.dart';
-import 'package:food_ox/features/auth/data/data_provider/local/my_config_cache.dart';
-import 'package:food_ox/features/auth/data/data_provider/local/my_config_cache_keys.dart';
 import 'package:food_ox/features/home/presentation/home_screen.dart';
 import 'package:food_ox/features/schedule/managers/schedule_cubit.dart';
 import 'package:food_ox/features/schedule/presentation/componant/check_box_componant.dart';
@@ -17,22 +14,14 @@ class ScheduleScreen extends StatelessWidget {
   GlobalKey<FormState> scheduleKey = GlobalKey<FormState>();
   String chooseBreakFast = "week";
 
-  // TextEditingController breakTimeController = TextEditingController();
-  //
-  // TextEditingController lunchFromTimeController = TextEditingController();
-  // TextEditingController lunchToTimeController = TextEditingController();
-  //
-  // TextEditingController drinkFromTimeController = TextEditingController();
-  // TextEditingController drinkToTimeController = TextEditingController();
-
   ScheduleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String lunchFrom = "${TimeOfDay.now().format(context).substring(0, 5)}";
-    String lunchTO = "${TimeOfDay.now().format(context).substring(0, 5)}";
-    String drinkFrom = "${TimeOfDay.now().format(context).substring(0, 5)}";
-    String drinkTo = "${TimeOfDay.now().format(context).substring(0, 5)}";
+    String lunchFrom = TimeOfDay.now().format(context).substring(0, 5);
+    String lunchTO = TimeOfDay.now().format(context).substring(0, 5);
+    String drinkFrom = TimeOfDay.now().format(context).substring(0, 5);
+    String drinkTo = TimeOfDay.now().format(context).substring(0, 5);
 
     return BlocConsumer<ScheduleCubit, ScheduleState>(
       listener: (context, state) {
@@ -92,13 +81,13 @@ class ScheduleScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'BreakFast : ',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.underline,
-                          ),
+                          style: GoogleFonts.darkerGrotesque(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.underline,
+                              height: 1.h),
                         ),
                         ThemeSelectionComponent(
                           onThemeChanged: (isWeek) {
@@ -117,20 +106,20 @@ class ScheduleScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Lunch : ',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.underline,
-                          ),
+                          style: GoogleFonts.darkerGrotesque(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.underline,
+                              height: 1.h),
                         ),
                         SizedBox(height: 20.h),
                         Row(
                           children: [
                             Text(
                               "From : ",
-                              style: TextStyle(fontSize: 18.sp),
+                              style: TextStyle(fontSize: 16.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -143,7 +132,7 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                             Text(
                               "  To : ",
-                              style: TextStyle(fontSize: 18.sp),
+                              style: TextStyle(fontSize: 16.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -164,13 +153,13 @@ class ScheduleScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Drinks : ',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.underline,
-                          ),
+                          style: GoogleFonts.darkerGrotesque(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.underline,
+                              height: 1.h),
                         ),
                         SizedBox(height: 20.h),
                         Row(
