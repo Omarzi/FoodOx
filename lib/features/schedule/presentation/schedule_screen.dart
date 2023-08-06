@@ -16,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ScheduleScreen extends StatelessWidget {
   GlobalKey<FormState> scheduleKey = GlobalKey<FormState>();
   String chooseBreakFast = "week";
+
   // TextEditingController breakTimeController = TextEditingController();
   //
   // TextEditingController lunchFromTimeController = TextEditingController();
@@ -88,394 +89,6 @@ class ScheduleScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Column(
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-                    //         Row(
-                    //           children: [
-                    //             Text(
-                    //               'Hi,',
-                    //               style: GoogleFonts.darkerGrotesque(
-                    //                 color: AppColors.blackColor,
-                    //                 height: 1.h,
-                    //                 fontWeight: FontWeight.w500,
-                    //                 fontSize: 24.sp,
-                    //               ),
-                    //             ),
-                    //             SizedBox(width: 5.w),
-                    //             Text(
-                    //               'Good Morning',
-                    //               style: GoogleFonts.darkerGrotesque(
-                    //                 color:
-                    //                     AppColors.blackColor.withOpacity(0.9),
-                    //                 height: 1.h,
-                    //                 fontWeight: FontWeight.w400,
-                    //                 fontSize: 16.sp,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //         SizedBox(height: 8.h),
-                    //         Row(
-                    //           children: [
-                    //             Text(
-                    //               MyConfigCach.getString(
-                    //                   key: MyConfigCacheKeys.myUserName),
-                    //               style: GoogleFonts.darkerGrotesque(
-                    //                 color:
-                    //                     AppColors.blackColor.withOpacity(0.9),
-                    //                 height: 1.h,
-                    //                 fontWeight: FontWeight.w400,
-                    //                 fontSize: 16.sp,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ],
-                    //     ),
-                    //     CircleAvatar(
-                    //       radius: 32.r,
-                    //       backgroundColor: AppColors.transparentColor,
-                    //       child: SvgPicture.asset('assets/svg/chef.svg'),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 25.h),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'Select your Break time:',
-                    //       style: GoogleFonts.darkerGrotesque(
-                    //         color: AppColors.blackColor,
-                    //         decoration: TextDecoration.underline,
-                    //         height: 1.h,
-                    //         fontWeight: FontWeight.w500,
-                    //         fontSize: 20.sp,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 30.h),
-                    // TextFormField(
-                    //   controller: breakTimeController,
-                    //   cursorColor: AppColors.darkGrey,
-                    //   keyboardType: TextInputType.text,
-                    //   validator: (value) {},
-                    //   textInputAction: TextInputAction.next,
-                    //   style: GoogleFonts.darkerGrotesque(
-                    //     fontSize: 16.8.sp,
-                    //     height: 1.h,
-                    //     color: AppColors.black3Color,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    //   decoration: InputDecoration(
-                    //     contentPadding: EdgeInsets.only(
-                    //       bottom: 5.h,
-                    //       left: 5.w,
-                    //     ),
-                    //     filled: true,
-                    //     fillColor: AppColors.whiteColor.withOpacity(0.9),
-                    //     hintText: 'For breakfast: month or week',
-                    //     hintStyle: GoogleFonts.darkerGrotesque(
-                    //       color: Colors.grey[500],
-                    //       fontWeight: FontWeight.w600,
-                    //       fontSize: 16.sp,
-                    //       height: 1.h,
-                    //     ),
-                    //     border: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(10.sp),
-                    //       borderSide: BorderSide(
-                    //         color: AppColors.greyColor,
-                    //         width: 1.sp,
-                    //       ),
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(10.sp),
-                    //       borderSide: BorderSide(
-                    //         color: AppColors.greyColor,
-                    //         width: 1.sp,
-                    //       ),
-                    //     ),
-                    //     errorBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(10.sp),
-                    //       borderSide: BorderSide(
-                    //         color: AppColors.errorColor,
-                    //         width: 1.sp,
-                    //       ),
-                    //     ),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(10.sp),
-                    //       borderSide: BorderSide(
-                    //         color: AppColors.darkGrey,
-                    //         width: 1.sp,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(height: 10.h),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     SizedBox(
-                    //       width: 160.w,
-                    //       child: TextFormField(
-                    //         controller: lunchFromTimeController,
-                    //         cursorColor: AppColors.darkGrey,
-                    //         keyboardType: TextInputType.number,
-                    //         validator: (value) {},
-                    //         onChanged: (value) {
-                    //           formatTime(lunchFromTimeController);
-                    //         },
-                    //         textInputAction: TextInputAction.next,
-                    //         style: GoogleFonts.darkerGrotesque(
-                    //           fontSize: 16.8.sp,
-                    //           height: 1.h,
-                    //           color: AppColors.black3Color,
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //         decoration: InputDecoration(
-                    //           contentPadding: EdgeInsets.only(
-                    //             bottom: 5.h,
-                    //             left: 5.w,
-                    //           ),
-                    //           filled: true,
-                    //           fillColor: AppColors.whiteColor.withOpacity(0.9),
-                    //           hintText: 'For lunch: from ...',
-                    //           hintStyle: GoogleFonts.darkerGrotesque(
-                    //             color: Colors.grey[500],
-                    //             fontWeight: FontWeight.w600,
-                    //             fontSize: 16.sp,
-                    //             height: 1.h,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           enabledBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           errorBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.errorColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           focusedBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.darkGrey,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: 160.w,
-                    //       child: TextFormField(
-                    //         controller: lunchToTimeController,
-                    //         cursorColor: AppColors.darkGrey,
-                    //         keyboardType: TextInputType.number,
-                    //         validator: (value) {},
-                    //         onChanged: (value) {
-                    //           formatTime(lunchFromTimeController);
-                    //         },
-                    //         textInputAction: TextInputAction.next,
-                    //         style: GoogleFonts.darkerGrotesque(
-                    //           fontSize: 16.8.sp,
-                    //           height: 1.h,
-                    //           color: AppColors.black3Color,
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //         decoration: InputDecoration(
-                    //           contentPadding: EdgeInsets.only(
-                    //             bottom: 5.h,
-                    //             left: 5.w,
-                    //           ),
-                    //           filled: true,
-                    //           fillColor: AppColors.whiteColor.withOpacity(0.9),
-                    //           hintText: 'For lunch: to ...',
-                    //           hintStyle: GoogleFonts.darkerGrotesque(
-                    //             color: Colors.grey[500],
-                    //             fontWeight: FontWeight.w600,
-                    //             fontSize: 16.sp,
-                    //             height: 1.h,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           enabledBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           errorBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.errorColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           focusedBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.darkGrey,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 10.h),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     SizedBox(
-                    //       width: 160.w,
-                    //       child: TextFormField(
-                    //         controller: drinkFromTimeController,
-                    //         cursorColor: AppColors.darkGrey,
-                    //         keyboardType: TextInputType.number,
-                    //         validator: (value) {},
-                    //         onChanged: (value) {
-                    //           formatTime(lunchFromTimeController);
-                    //         },
-                    //         textInputAction: TextInputAction.next,
-                    //         style: GoogleFonts.darkerGrotesque(
-                    //           fontSize: 16.8.sp,
-                    //           height: 1.h,
-                    //           color: AppColors.black3Color,
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //         decoration: InputDecoration(
-                    //           contentPadding: EdgeInsets.only(
-                    //             bottom: 5.h,
-                    //             left: 5.w,
-                    //           ),
-                    //           filled: true,
-                    //           fillColor: AppColors.whiteColor.withOpacity(0.9),
-                    //           hintText: 'For drink: from ...',
-                    //           hintStyle: GoogleFonts.darkerGrotesque(
-                    //             color: Colors.grey[500],
-                    //             fontWeight: FontWeight.w600,
-                    //             fontSize: 16.sp,
-                    //             height: 1.h,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           enabledBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           errorBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.errorColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           focusedBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.darkGrey,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: 160.w,
-                    //       child: TextFormField(
-                    //         controller: drinkToTimeController,
-                    //         cursorColor: AppColors.darkGrey,
-                    //         keyboardType: TextInputType.number,
-                    //         validator: (value) {},
-                    //         onChanged: (value) {
-                    //           formatTime(lunchFromTimeController);
-                    //         },
-                    //         textInputAction: TextInputAction.next,
-                    //         style: GoogleFonts.darkerGrotesque(
-                    //           fontSize: 16.8.sp,
-                    //           height: 1.h,
-                    //           color: AppColors.black3Color,
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //         decoration: InputDecoration(
-                    //           contentPadding: EdgeInsets.only(
-                    //             bottom: 5.h,
-                    //             left: 5.w,
-                    //           ),
-                    //           filled: true,
-                    //           fillColor: AppColors.whiteColor.withOpacity(0.9),
-                    //           hintText: 'For drink: to ...',
-                    //           hintStyle: GoogleFonts.darkerGrotesque(
-                    //             color: Colors.grey[500],
-                    //             fontWeight: FontWeight.w600,
-                    //             fontSize: 16.sp,
-                    //             height: 1.h,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           enabledBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.greyColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           errorBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.errorColor,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //           focusedBorder: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(10.sp),
-                    //             borderSide: BorderSide(
-                    //               color: AppColors.darkGrey,
-                    //               width: 1.sp,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -499,7 +112,7 @@ class ScheduleScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 10.h),
-                    Divider(color: Colors.grey[500],thickness: 1),
+                    Divider(color: Colors.grey[500], thickness: 1),
                     SizedBox(height: 10.h),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -517,7 +130,7 @@ class ScheduleScreen extends StatelessWidget {
                           children: [
                             Text(
                               "From : ",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -530,7 +143,7 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                             Text(
                               "  To : ",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -545,11 +158,9 @@ class ScheduleScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     SizedBox(height: 25.h),
-                    Divider(color: Colors.grey[500],thickness: 1),
+                    Divider(color: Colors.grey[500], thickness: 1),
                     SizedBox(height: 25.h),
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -566,7 +177,7 @@ class ScheduleScreen extends StatelessWidget {
                           children: [
                             Text(
                               "From : ",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -579,7 +190,7 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                             Text(
                               "  To : ",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18.sp),
                             ),
                             Flexible(
                               child: TimeSelectionComponent(
@@ -607,60 +218,18 @@ class ScheduleScreen extends StatelessWidget {
               title: 'Next',
               fontSize: 15.5.sp,
               onPress: () {
-                 cubit.makeSchedule(
-                   period: chooseBreakFast,
-                   work_from: lunchFrom,
-                   work_to: lunchTO,
-                   break_from: drinkFrom,
-                   break_to: drinkTo,
-                 );
-              print("""
-.$lunchFrom,
-.$lunchTO,
-.$drinkFrom,
-.$drinkTo
-$chooseBreakFast
-               """);
+                cubit.makeSchedule(
+                  period: chooseBreakFast,
+                  work_from: lunchFrom,
+                  work_to: lunchTO,
+                  break_from: drinkFrom,
+                  break_to: drinkTo,
+                );
               },
             ),
           ),
         );
       },
     );
-  }
-
-  //
-  // void formatTime(TextEditingController controller) {
-  //   String text = controller.text.trim();
-  //   String text2 = controller.text.trim();
-  //   if (text.isNotEmpty && text.length <= 2) {
-  //     int hours = int.parse(text);
-  //     int minutes = int.parse(text2);
-  //     if (hours != null) {
-  //       String formattedTime = hours.toString().padLeft(2, '0') + ':${minutes.toString().padLeft(2)}';
-  //       if (formattedTime != controller.text) {
-  //         controller.value = controller.value.copyWith(
-  //           text: formattedTime,
-  //           selection: TextSelection.collapsed(offset: formattedTime.length),
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
-
-  void formatTime(TextEditingController controller) {
-    String text = controller.text.trim();
-    if (text.isNotEmpty && text.length <= 2) {
-      int hours = int.parse(text);
-      if (hours != null) {
-        String formattedTime = hours.toString().padLeft(2, '0') + ':00';
-        if (formattedTime != controller.text) {
-          controller.value = controller.value.copyWith(
-            text: formattedTime,
-            selection: TextSelection.collapsed(offset: formattedTime.length),
-          );
-        }
-      }
-    }
   }
 }

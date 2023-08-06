@@ -40,7 +40,7 @@ class _TimeSelectionComponentState extends State<TimeSelectionComponent> {
     return GestureDetector(
       onTap: _showTimePicker,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: Colors.grey),
