@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_ox/components/app_buttons.dart';
 import 'package:food_ox/components/snack_bar.dart';
-import 'package:food_ox/features/home/presentation/home_screen.dart';
+import 'package:food_ox/features/categries/managers/categories_cubit.dart';
+import 'package:food_ox/features/layout/home/presentation/home_screen.dart';
+import 'package:food_ox/features/layout/layout.dart';
 import 'package:food_ox/features/schedule/managers/schedule_cubit.dart';
 import 'package:food_ox/features/schedule/presentation/componant/check_box_componant.dart';
 import 'package:food_ox/features/schedule/presentation/componant/data_componant.dart';
+import 'package:food_ox/features/schedule/presentation/componant/week_of_days_componant.dart';
 import 'package:food_ox/styles/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,23 +18,27 @@ class ScheduleScreen extends StatelessWidget {
   String chooseBreakFast = "week";
 
   ScheduleScreen({Key? key}) : super(key: key);
+  List<int> weekList = [];
 
   @override
   Widget build(BuildContext context) {
-    String lunchFrom = TimeOfDay.now().format(context).substring(0, 5);
-    String lunchTO = TimeOfDay.now().format(context).substring(0, 5);
-    String drinkFrom = TimeOfDay.now().format(context).substring(0, 5);
-    String drinkTo = TimeOfDay.now().format(context).substring(0, 5);
+    String lunchFrom = TimeOfDay.now().format(context);
+    String lunchTO = TimeOfDay.now().format(context);
+    String drinkFrom = TimeOfDay.now().format(context);
+    String drinkTo = TimeOfDay.now().format(context);
 
     return BlocConsumer<ScheduleCubit, ScheduleState>(
       listener: (context, state) {
+var cubit = ScheduleCubit.get(context);
         if (state is ScheduleSuccessState) {
+          context.read<CategoriesCubit>().getMenu();
+          cubit.getSchedule();
           Navigator.push(
             context,
             PageRouteBuilder(
               transitionDuration: const Duration(milliseconds: 200),
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  HomeScreen(),
+                  const LayoutScreen(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
@@ -49,7 +56,7 @@ class ScheduleScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = ScheduleCubit().get(context);
+        var cubit = ScheduleCubit.get(context);
         return Scaffold(
           backgroundColor: AppColors.backGroundColor,
           appBar: AppBar(
@@ -83,7 +90,7 @@ class ScheduleScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'BreakFast : ',
+                          'Period : ',
                           style: GoogleFonts.darkerGrotesque(
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w700,
@@ -109,7 +116,7 @@ class ScheduleScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Lunch : ',
+                          'Work Time : ',
                           style: GoogleFonts.darkerGrotesque(
                               fontSize: 22.sp,
                               fontWeight: FontWeight.w700,
@@ -131,8 +138,9 @@ class ScheduleScreen extends StatelessWidget {
                               child: TimeSelectionComponent(
                                 initialTime: TimeOfDay.now(),
                                 onChanged: (selectedTime) {
+                                  lunchFrom = selectedTime.format(context);
                                   print(
-                                      "the date is :${selectedTime.format(context).substring(0, 4)}:");
+                                      "the date is :${selectedTime.format(context)},");
                                 },
                               ),
                             ),
@@ -148,6 +156,7 @@ class ScheduleScreen extends StatelessWidget {
                               child: TimeSelectionComponent(
                                 initialTime: TimeOfDay.now(),
                                 onChanged: (selectedTime) {
+                                  lunchTO = selectedTime.format(context);
                                   print(
                                       "the date is :${selectedTime.format(context).substring(0, 4)}:");
                                 },
@@ -164,7 +173,7 @@ class ScheduleScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Drinks : ',
+                          'Break Time : ',
                           style: GoogleFonts.darkerGrotesque(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
@@ -186,6 +195,7 @@ class ScheduleScreen extends StatelessWidget {
                               child: TimeSelectionComponent(
                                 initialTime: TimeOfDay.now(),
                                 onChanged: (selectedTime) {
+                                  drinkFrom = selectedTime.format(context);
                                   print(
                                       "the date is :${selectedTime.format(context).substring(0, 4)}:");
                                 },
@@ -203,6 +213,7 @@ class ScheduleScreen extends StatelessWidget {
                               child: TimeSelectionComponent(
                                 initialTime: TimeOfDay.now(),
                                 onChanged: (selectedTime) {
+                                  drinkTo = selectedTime.format(context);
                                   print(
                                       "the date is :${selectedTime.format(context).substring(0, 4)}:");
                                 },
@@ -210,6 +221,24 @@ class ScheduleScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
+                    Divider(color: Colors.grey[500], thickness: 1),
+                    SizedBox(height: 25.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Days : ',
+                          style: GoogleFonts.darkerGrotesque(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w700,
+                            decoration: TextDecoration.underline,
+                            height: 1.h,
+                          ),
+                        ),
+                        WeekdaySelectionWidget(chossenList: weekList),
                       ],
                     ),
                   ],
@@ -225,13 +254,21 @@ class ScheduleScreen extends StatelessWidget {
               title: 'Next',
               fontSize: 15.5.sp,
               onPress: () {
-                cubit.makeSchedule(
+            if(weekList.isEmpty){
+              SnackBar snackBar =
+              SnackBarComponent.snackBar(content: 'Please Choose one Day at least');
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }else{
+              cubit.makeSchedule(
                   period: chooseBreakFast,
                   work_from: lunchFrom,
                   work_to: lunchTO,
                   break_from: drinkFrom,
                   break_to: drinkTo,
-                );
+                  weekList: weekList);
+            }
+
+                // Navigator.push(context, MaterialPageRoute(builder: (c)=>  HomeScreen()));
               },
             ),
           ),

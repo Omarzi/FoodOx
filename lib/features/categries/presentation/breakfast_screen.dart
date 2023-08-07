@@ -4,14 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_ox/components/app_buttons.dart';
 import 'package:food_ox/components/snack_bar.dart';
+import 'package:food_ox/features/categries/data/get_gategories_model.dart';
 import 'package:food_ox/features/categries/managers/categories_cubit.dart';
 import 'package:food_ox/features/categries/presentation/lunch_screen.dart';
 import 'package:food_ox/styles/app_colors.dart';
 import 'package:food_ox/utiles/app_constatnts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BreakFastScreen extends StatelessWidget {
-  const BreakFastScreen({Key? key}) : super(key: key);
+class BreakFastScreen extends StatefulWidget {
+  const BreakFastScreen({Key? key, required this.whereFrom}) : super(key: key);
+  final String whereFrom;
+
+  @override
+  State<BreakFastScreen> createState() => _BreakFastScreenState();
+}
+
+class _BreakFastScreenState extends State<BreakFastScreen> {
+  List<Food> choosenList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +63,7 @@ class BreakFastScreen extends StatelessWidget {
                       color: AppColors.standardColor,
                     ),
                   )
-                : cubit.getCategoryModel! == null
+                : cubit.getCategoryModel == null
                     ? const CircularProgressIndicator(
                         color: AppColors.standardColor,
                       )
@@ -89,24 +98,20 @@ class BreakFastScreen extends StatelessWidget {
                                   mainAxisSpacing: 25.h,
                                 ),
                                 itemBuilder: (context, index) {
+                                  var item =
+                                      cubit.getCategoryModel!.food![index];
                                   return Container(
                                     width: 173.w,
                                     height: 236.h,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20.r),
-                                        topRight: Radius.circular(20.r),
-                                      ),
+                                      borderRadius: BorderRadius.circular(20.r),
                                       color: AppColors.standardColor2,
                                     ),
                                     child: Column(
                                       children: [
                                         SizedBox(height: 5.h),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(20.r),
-                                            topLeft: Radius.circular(20.r),
-                                          ),
+                                          borderRadius: BorderRadius.circular(20.r),
                                           child: Image.network(
                                             '${AppConstants.baseUrl}${cubit.getCategoryModel!.food![index].img.toString()}',
                                             height: 90.h,
@@ -164,33 +169,38 @@ class BreakFastScreen extends StatelessWidget {
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  cubit.addMenu(
-                                                      foods: cubit
-                                                          .getCategoryModel!
-                                                          .food!);
-                                                },
-                                                child: Container(
-                                                  width: 24.w,
-                                                  height: 25.h,
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.color,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      5.r,
+                                              choosenList.contains(item) == true
+                                                  ? const Icon(
+                                                      Icons.check_circle)
+                                                  : InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          choosenList.add(item);
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        width: 24.w,
+                                                        height: 25.h,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              AppColors.color,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                            5.r,
+                                                          ),
+                                                        ),
+                                                        child: Center(
+                                                          child: Icon(
+                                                            Icons.add,
+                                                            color: AppColors
+                                                                .whiteColor,
+                                                            size: 18.sp,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      color:
-                                                          AppColors.whiteColor,
-                                                      size: 18.sp,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
                                               Text(
                                                 '${cubit.getCategoryModel!.food![index].category}',
                                                 style:
@@ -225,12 +235,13 @@ class BreakFastScreen extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       transitionDuration: const Duration(milliseconds: 200),
-                      pageBuilder: (context, animation, secondaryAnimation) => LunchScreen(
-                        getCategoryModel: cubit.getCategoryModel!,
-                      ),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          LunchScreen(choosenList: choosenList),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
                         return FadeTransition(
-                          opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                          opacity: Tween<double>(begin: 0, end: 1)
+                              .animate(animation),
                           child: child,
                         );
                       },

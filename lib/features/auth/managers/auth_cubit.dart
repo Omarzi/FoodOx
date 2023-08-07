@@ -14,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   DioHelper dioHelper = DioHelper();
 
-  UserModel userModel = UserModel();
+  UserModel? userModel;
 
   Future<void> login({
     required String email,
@@ -27,8 +27,8 @@ class AuthCubit extends Cubit<AuthState> {
     }).then((response) {
       print(response.data);
       userModel = UserModel.fromJson(response.data);
-      MyConfigCach.putString(key: MyConfigCacheKeys.token, value: userModel.token!);
-      MyConfigCach.putString(key: MyConfigCacheKeys.myUserName, value: userModel.user!.username!);
+      MyConfigCach.putString(key: MyConfigCacheKeys.token, value: userModel!.token!);
+      MyConfigCach.putString(key: MyConfigCacheKeys.myUserName, value: userModel!.user!.username!);
       emit(LoginSuccessState());
     }).catchError((error) {
       print('Error in login is $error');

@@ -9,17 +9,42 @@ import 'package:food_ox/styles/app_colors.dart';
 import 'package:food_ox/utiles/app_constatnts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DrinksScreen extends StatelessWidget {
-  GetCategoryModel? getCategoryModel;
+class DrinksScreen extends StatefulWidget {
+  List<Food> choosenList;
 
-  DrinksScreen({Key? key, required this.getCategoryModel}) : super(key: key);
+  DrinksScreen({Key? key, required this.choosenList}) : super(key: key);
 
+  @override
+  State<DrinksScreen> createState() => _DrinksScreenState();
+}
+
+class _DrinksScreenState extends State<DrinksScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CategoriesCubit()..getBreakFast(type: 'drink'),
       child: BlocConsumer<CategoriesCubit, CategoriesState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          var cubit = BlocProvider.of<CategoriesCubit>(context);
+
+          if(state is AddFoodToMenuSuccessState){
+            cubit.getMenu();
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                transitionDuration: const Duration(milliseconds: 200),
+                pageBuilder: (context, animation, secondaryAnimation) => ScheduleScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                    child: child,
+                  );
+                },
+              ),
+            );
+          }
+
+        },
         builder: (context, state) {
           var cubit = BlocProvider.of<CategoriesCubit>(context);
 
@@ -45,7 +70,7 @@ class DrinksScreen extends StatelessWidget {
                       color: AppColors.standardColor,
                     ),
                   )
-                : cubit.getCategoryModel! == null
+                : cubit.getCategoryModel == null
                     ? const CircularProgressIndicator(
                         color: AppColors.standardColor,
                       )
@@ -80,24 +105,20 @@ class DrinksScreen extends StatelessWidget {
                                   mainAxisSpacing: 25.h,
                                 ),
                                 itemBuilder: (context, index) {
+                                  var item =
+                                  cubit.getCategoryModel!.food![index];
                                   return Container(
                                     width: 173.w,
                                     height: 236.h,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20.r),
-                                        topRight: Radius.circular(20.r),
-                                      ),
+                                      borderRadius: BorderRadius.circular(20.r),
                                       color: AppColors.standardColor2,
                                     ),
                                     child: Column(
                                       children: [
                                         SizedBox(height: 5.h),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(20.r),
-                                            topLeft: Radius.circular(20.r),
-                                          ),
+                                          borderRadius: BorderRadius.circular(20.r),
                                           child: Image.network(
                                             '${AppConstants.baseUrl}${cubit.getCategoryModel!.food![index].img.toString()}',
                                             height: 90.h,
@@ -156,12 +177,14 @@ class DrinksScreen extends StatelessWidget {
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                              InkWell(
+                                              widget.choosenList.contains(item) == true
+                                                  ? const Icon(
+                                                  Icons.check_circle)
+                                                  : InkWell(
                                                 onTap: () {
-                                                  cubit.addMenu(
-                                                      foods: cubit
-                                                          .getCategoryModel!
-                                                          .food!);
+                                                  setState(() {
+                                                    widget.choosenList.add(item);
+                                                  });
                                                 },
                                                 child: Container(
                                                   width: 24.w,
@@ -213,6 +236,7 @@ class DrinksScreen extends StatelessWidget {
                 title: 'Next',
                 fontSize: 15.5.sp,
                 onPress: () {
+                  cubit.addMenu(foods:widget. choosenList);
                   // Navigator.push(
                   //   context,
                   //   PageRouteBuilder(
@@ -228,19 +252,7 @@ class DrinksScreen extends StatelessWidget {
                   //     },
                   //   ),
                   // );
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 200),
-                      pageBuilder: (context, animation, secondaryAnimation) => ScheduleScreen(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return FadeTransition(
-                          opacity: Tween<double>(begin: 0, end: 1).animate(animation),
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
+
 
                 },
               ),

@@ -6,9 +6,20 @@ import 'package:food_ox/features/auth/managers/auth_cubit.dart';
 import 'package:food_ox/features/categries/managers/categories_cubit.dart';
 import 'package:food_ox/features/schedule/managers/schedule_cubit.dart';
 
-class FoodOxApp extends StatelessWidget {
+class FoodOxApp extends StatefulWidget {
   const FoodOxApp({Key? key}) : super(key: key);
 
+  @override
+  State<FoodOxApp> createState() => _FoodOxAppState();
+}
+
+class _FoodOxAppState extends State<FoodOxApp> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ScheduleCubit>().getSchedule();
+    context.read<CategoriesCubit>().getMenu();
+  }
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -16,17 +27,12 @@ class FoodOxApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, child) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => AuthCubit()),
-            BlocProvider(create: (context) => ScheduleCubit()),
-          ],
-          child: const MaterialApp(
+        return  const MaterialApp(
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RouteGenerator.getRoute,
             // initialRoute: 'loginScreen',
             initialRoute: 'splashScreen',
-          ),
+
         );
       },
     );

@@ -4,9 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_ox/components/app_buttons.dart';
 import 'package:food_ox/components/circulare_progress.dart';
 import 'package:food_ox/components/snack_bar.dart';
+import 'package:food_ox/config/app_routes.dart';
 import 'package:food_ox/features/auth/managers/auth_cubit.dart';
 import 'package:food_ox/features/auth/presentation/components/text_for_field_for_passwrod.dart';
 import 'package:food_ox/features/auth/presentation/components/text_form_field.dart';
+import 'package:food_ox/features/categries/managers/categories_cubit.dart';
+import 'package:food_ox/features/layout/home/managers/home_cubit.dart';
+import 'package:food_ox/features/schedule/managers/schedule_cubit.dart';
 import 'package:food_ox/styles/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,10 +52,28 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if(state is LoginSuccessState) {
-            Navigator.pushReplacementNamed(context, 'breakfastScreen');
-          }
-          else if (state is LoginErrorState) {
+          var scheduleCubit = BlocProvider.of<ScheduleCubit>(context);
+          var categoryCubit = BlocProvider.of<CategoriesCubit>(context);
+          if (state is LoginSuccessState) {
+            context.read<HomeCubit>().getProfileData();
+            context.read<CategoriesCubit>().getMenu();
+            Navigator.pushNamed(context, RoutePath.landingScreen);
+            // if (scheduleCubit.getScheduleModel != null &&
+            //     categoryCubit.getUserMenuModel != null) {
+            //   if (scheduleCubit.getScheduleModel!.exists == true &&
+            //       categoryCubit.getUserMenuModel!.exists == true) {
+            //     Navigator.pushReplacementNamed(context, RoutePath.layoutScreen);
+            //   } else if (scheduleCubit.getScheduleModel!.exists == true &&
+            //       categoryCubit.getUserMenuModel!.exists == false) {
+            //     Navigator.pushReplacementNamed(context, RoutePath.breakFastScreen,arguments: '');
+            //   } else if (scheduleCubit.getScheduleModel!.exists == false &&
+            //       categoryCubit.getUserMenuModel!.exists == true) {
+            //     Navigator.pushReplacementNamed(context, RoutePath.scheduleScreen);
+            //   } else {
+            //     Navigator.pushReplacementNamed(context, RoutePath.breakFastScreen,arguments: '');
+            //   }
+            // }
+          } else if (state is LoginErrorState) {
             SnackBar snackBar =
                 SnackBarComponent.snackBar(content: 'Login has a problem');
             ScaffoldMessenger.of(context).showSnackBar(snackBar);

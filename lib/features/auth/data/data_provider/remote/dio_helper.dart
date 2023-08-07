@@ -20,6 +20,8 @@ class DioHelper {
         },
       ),
     );
+    print("${MyConfigCach.getString(key: MyConfigCacheKeys.token)}");
+
     return response;
   }
 
@@ -40,6 +42,8 @@ class DioHelper {
           },
         ),
       );
+      print("${MyConfigCach.getString(key: MyConfigCacheKeys.token)}");
+
       if (kDebugMode) {
         print(response.data);
       }
