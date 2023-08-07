@@ -31,7 +31,7 @@ class ScheduleScreen extends StatelessWidget {
             PageRouteBuilder(
               transitionDuration: const Duration(milliseconds: 200),
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  HomeScreen(),
+                  const HomeScreen(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
@@ -225,6 +225,11 @@ class ScheduleScreen extends StatelessWidget {
               title: 'Next',
               fontSize: 15.5.sp,
               onPress: () {
+                print(chooseBreakFast);
+                print(lunchFrom);
+                print(lunchTO);
+                print(drinkFrom);
+                print(drinkTo);
                 cubit.makeSchedule(
                   period: chooseBreakFast,
                   work_from: lunchFrom,
