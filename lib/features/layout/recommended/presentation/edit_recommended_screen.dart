@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_ox/styles/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ox/utiles/app_constatnts.dart';
 import 'package:food_ox/components/app_buttons.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_ox/features/layout/home/managers/home_cubit.dart';
 import 'package:food_ox/features/categries/data/get_user_menu_model.dart';
 import 'package:food_ox/features/categries/managers/categories_cubit.dart';
-import 'package:food_ox/features/layout/home/managers/home_cubit.dart';
 import 'package:food_ox/features/layout/recommended/manageres/recommended_cubit.dart';
-import 'package:food_ox/styles/app_colors.dart';
-import 'package:food_ox/utiles/app_constatnts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditRecommendedScreen extends StatefulWidget {
@@ -85,163 +85,177 @@ class _EditRecommendedScreenState extends State<EditRecommendedScreen> {
                                 child: menuModel == null
                                     ? const Center(
                                         child: CircularProgressIndicator())
-                                    :
-                                menuModel.menu
-                                    == null
-                                    ? const Center(
-                                    child: CircularProgressIndicator())
-                                    :
-
-                                ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:
-                                            menuModel.menu!.breakFast!.length,
-                                        itemBuilder: (context, index) {
-                                          var itemBreakFast =
-                                              menuModel.menu!.breakFast![index];
-                                          return Container(
-                                            width: 173.w,
-                                            height: 236.h,
-                                            margin: EdgeInsets.all(10.w),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(20.r),
-                                              color: AppColors.standardColor2,
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                SizedBox(height: 5.h),
-                                                ClipRRect(
+                                    : menuModel.menu == null
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: menuModel
+                                                .menu!.breakFast!.length,
+                                            itemBuilder: (context, index) {
+                                              var itemBreakFast = menuModel.menu!.breakFast![index];
+                                              return Container(
+                                                width: 173.w,
+                                                height: 236.h,
+                                                margin: EdgeInsets.all(10.w),
+                                                decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(20.r),
-                                                    topLeft:
-                                                        Radius.circular(20.r),
-                                                  ),
-                                                  child: Image.network(
-                                                    '${AppConstants.baseUrl}${itemBreakFast.img.toString()}',
-                                                    height: 90.h,
-                                                    width: 164.w,
-                                                  ),
+                                                      BorderRadius.circular(
+                                                          20.r),
+                                                  color:
+                                                      AppColors.standardColor2,
                                                 ),
-                                                SizedBox(height: 10.h),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 5.w),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        itemBreakFast.name!,
-                                                        style: GoogleFonts
-                                                            .darkerGrotesque(
-                                                          height: 1.h,
-                                                          color: AppColors
-                                                              .whiteColor,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(height: 5.h),
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(
+                                                                20.r),
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                20.r),
                                                       ),
-                                                      Text(
-                                                        '${itemBreakFast.price} EGP',
-                                                        style: GoogleFonts
-                                                            .darkerGrotesque(
-                                                          height: 1.h,
-                                                          color: AppColors
-                                                              .whiteColor,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                      child: Image.network(
+                                                        '${AppConstants.baseUrl}${itemBreakFast.img.toString()}',
+                                                        height: 90.h,
+                                                        width: 164.w,
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(height: 15.h),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 5.w),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        itemBreakFast.type!,
-                                                        style: GoogleFonts
-                                                            .darkerGrotesque(
-                                                          height: 1.h,
-                                                          color: AppColors
-                                                              .whiteColor,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      choossenList.contains(
-                                                                  itemBreakFast) ==
-                                                              true
-                                                          ? Icon(
-                                                              Icons
-                                                                  .check_circle,
-                                                              size: 30.sp,
+                                                    ),
+                                                    SizedBox(height: 10.h),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5.w),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            itemBreakFast.name!,
+                                                            style: GoogleFonts
+                                                                .darkerGrotesque(
+                                                              height: 1.h,
                                                               color: AppColors
-                                                                  .color,
-                                                            )
-                                                          : InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  choossenList.add(
-                                                                      itemBreakFast);
-                                                                });
-                                                              },
-                                                              child: Container(
-                                                                width: 24.w,
-                                                                height: 25.h,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                                                  .whiteColor,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '${itemBreakFast.price} EGP',
+                                                            style: GoogleFonts
+                                                                .darkerGrotesque(
+                                                              height: 1.h,
+                                                              color: AppColors
+                                                                  .whiteColor,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 15.h),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5.w),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            itemBreakFast.type!,
+                                                            style: GoogleFonts
+                                                                .darkerGrotesque(
+                                                              height: 1.h,
+                                                              color: AppColors
+                                                                  .whiteColor,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                          choossenList.contains(
+                                                                      itemBreakFast) ==
+                                                                  true
+                                                              ? Icon(
+                                                                  Icons
+                                                                      .check_circle,
+                                                                  size: 30.sp,
                                                                   color:
                                                                       AppColors
                                                                           .color,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                    5.r,
+                                                                )
+                                                              : InkWell(
+                                                                  onTap: () {
+                                                                    setState(
+                                                                        () {
+                                                                      choossenList
+                                                                          .add(
+                                                                              itemBreakFast);
+                                                                    });
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: 24.w,
+                                                                    height:
+                                                                        25.h,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: AppColors
+                                                                          .color,
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .circular(
+                                                                        5.r,
+                                                                      ),
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .add,
+                                                                        color: AppColors
+                                                                            .whiteColor,
+                                                                        size: 18
+                                                                            .sp,
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 ),
-                                                                child: Center(
-                                                                  child: Icon(
-                                                                    Icons.add,
-                                                                    color: AppColors
-                                                                        .whiteColor,
-                                                                    size: 18.sp,
-                                                                  ),
-                                                                ),
-                                                              ),
+                                                          Text(
+                                                            '${itemBreakFast.category}',
+                                                            style: GoogleFonts
+                                                                .darkerGrotesque(
+                                                              height: 1.h,
+                                                              color: AppColors
+                                                                  .whiteColor,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
                                                             ),
-                                                      Text(
-                                                        '${itemBreakFast.category}',
-                                                        style: GoogleFonts
-                                                            .darkerGrotesque(
-                                                          height: 1.h,
-                                                          color: AppColors
-                                                              .whiteColor,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      )),
+                                              );
+                                            },
+                                          )),
                             SizedBox(height: 10.h),
                             Divider(color: Colors.grey[500], thickness: 1),
                             Text(
@@ -269,9 +283,11 @@ class _EditRecommendedScreenState extends State<EditRecommendedScreen> {
                                               menuModel.menu!.lunch![index];
                                           return Container(
                                             width: 173.w,
-                                            height: 236.h, margin: EdgeInsets.all(10.w),
+                                            height: 236.h,
+                                            margin: EdgeInsets.all(10.w),
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(20.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
                                               color: AppColors.standardColor2,
                                             ),
                                             child: Column(
@@ -437,9 +453,11 @@ class _EditRecommendedScreenState extends State<EditRecommendedScreen> {
                                               menuModel.menu!.drinks![index];
                                           return Container(
                                             width: 173.w,
-                                            height: 236.h, margin: EdgeInsets.all(10.w),
+                                            height: 236.h,
+                                            margin: EdgeInsets.all(10.w),
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(20.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
                                               color: AppColors.standardColor2,
                                             ),
                                             child: Column(

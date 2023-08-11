@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ox/features/auth/data/data_provider/remote/dio_exeptions.dart';
 import 'package:food_ox/features/auth/data/data_provider/remote/dio_helper.dart';
 import 'package:food_ox/features/categries/data/get_gategories_model.dart';
 import 'package:food_ox/features/categries/data/get_user_menu_model.dart';
@@ -105,7 +108,8 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       print(value.data);
       getUserMenuModel = GetUserMenuModel.fromJson(value.data);
       emit(GetMenuSuccess());
-    }).catchError((e) {
+    }).catchError((DioExceptions e) {
+      log("the error in menu is ${e.message } ");
       emit(GetMenuError());
     });
   }
